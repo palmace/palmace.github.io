@@ -1,6 +1,6 @@
 // Asegúrate de cambiar la URL de la API a tu URL pública una vez que la despliegues.
 // Por ahora, usaremos la URL local para probar.
-const API_URL = 'https://url-redirector-api.onrender.com/get_url?' + Date.now(); 
+const API_URL = 'https://url-redirector-api.onrender.com/get_url_v2?' + Date.now(); 
 
 async function fetchAndRedirect() {
     try {
