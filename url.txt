@@ -1,1 +1,1 @@
-https://mall-durham-powerpoint-comfort.trycloudflare.com
+https://api.trycloudflare.com
