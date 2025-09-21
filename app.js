@@ -1,21 +1,38 @@
-// URL DIRECTA - Ignorar la API de Render
-const TUNNEL_URL = 'https://properly-expression-sampling-mls.trycloudflare.com';
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 2000; // 2 segundos
 
-// Redirigir inmediatamente
-function redirectToTunnel() {
-    // Verificar si estamos en la página principal
-    if (window.location.href === 'https://palmace.github.io/' || 
-        window.location.href === 'https://palmace.github.io') {
-        window.location.href = TUNNEL_URL;
+async function healthCheck(url, retries = MAX_RETRIES) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        if (retries > 0) {
+            await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+            return healthCheck(url, retries - 1);
+        }
+        return false;
     }
 }
 
-// Redirigir inmediatamente al cargar la página
-document.addEventListener('DOMContentLoaded', redirectToTunnel);
-
-// También redirigir si el usuario vuelve atrás
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        redirectToTunnel();
+async function smartRedirect() {
+    try {
+        // Primero verificar si el túnel está activo
+        const currentTunnelURL = 'https://properly-expression-sampling-mls.trycloudflare.com';
+        const isTunnelActive = await healthCheck(currentTunnelURL);
+        
+        if (isTunnelActive) {
+            window.location.href = currentTunnelURL;
+        } else {
+            // Si el túnel está caído, esperar y recargar
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error('Error en redirección:', error);
+        // Recargar después de 5 segundos
+        setTimeout(() => window.location.reload(), 5000);
     }
-});
+}
+
+// Iniciar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', smartRedirect);
