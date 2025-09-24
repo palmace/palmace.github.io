@@ -3,55 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clasificación de Lenguajes de Programación</title>
+    <title>Carrusel con Enlaces</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ... (Estilos CSS sin cambios) ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: white;
+        }
+        
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carousel-item a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .carousel-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .carousel-caption h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .carousel-caption p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .carousel-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+        
+        .carousel-item:hover .carousel-btn {
+            background: #2980b9;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .carousel-control:hover {
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-control.prev {
+            left: 15px;
+        }
+        
+        .carousel-control.next {
+            right: 15px;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background: white;
+        }
+        
+        .instructions {
+            max-width: 800px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+        
+        .instructions h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions code {
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-image {
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel-image {
+                height: 250px;
+            }
+            
+            .carousel-caption {
+                padding: 15px;
+            }
+            
+            .carousel-caption h3 {
+                font-size: 1.2rem;
+            }
+            
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Carrusel con Enlaces Clickables</h1>
+        
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <a href="https://www.example.com/travel" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Viajes" class="carousel-image">
+                        <div class="carousel-caption">
+                            <h3>Descubre el Mundo</h3>
+                            <p>Explora los destinos más increíbles del planeta</p>
+                            <span class="carousel-btn">Ver Ofertas</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="carousel-item">
+                    <a href="https://www.example.com/technology" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tecnología" class="carousel-image">
+                        <div class="carousel-caption">
+                            <h3>Nueva Tecnología</h3>
+                            <p>Los últimos dispositivos para hacer tu vida más fácil</p>
+                            <span class="carousel-btn">Descubrir</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="carousel-item">
+                    <a href="https://www.example.com/fitness" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fitness" class="carousel-image">
+                        <div class="carousel-caption">
+                            <h3>Vida Saludable</h3>
+                            <p>Mejora tu rutina de ejercicios y alimentación</p>
+                            <span class="carousel-btn">Comenzar</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <button class="carousel-control prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+            </div>
+        </div>
+        
 
-    <h1>Clasificación de Lenguajes de Programación</h1>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 12%">Criterio</th>
-                    <th style="width: 18%">Subcategoría</th>
-                    <th style="width: 25%">Lenguaje</th>
-                    <th style="width: 45%">Ejemplos notables</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="5" class="main-category">Generación</td>
-                    <td class="subcategory">1GL</td>
-                    <td class="language">Código máquina</td>
-                    <td class="examples">Programación directa de hardware y microcódigo</td>
-                </tr>
-                <tr>
-                    <td class="subcategory">2GL</td>
-                    <td class="language">Ensamblador</td>
-                    <td class="examples">Optimización de rendimiento crítico a nivel de hardware</td>
-                </tr>
-                <tr>
-                    <td class="subcategory">3GL</td>
-                    <td class="language">C, C++</td>
-                    <td class="examples">Desarrollo de sistemas operativos y compiladores</td>
-                </tr>
-                <tr>
-                    <td class="subcategory">4GL</td>
-                    <td class="language">SQL, MATLAB</td>
-                    <td class="examples">Manipulación de bases de datos y computación científica</td>
-                </tr>
-                <tr>
-                    <td class="subcategory">5GL</td>
-                    <td class="language">Prolog, LISP</td>
-                    <td class="examples">Desarrollo de sistemas basados en conocimiento e IA</td>
-                </tr>
-            </tbody>
-        </table>
+        </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.querySelector('.carousel-control.prev');
+            const nextBtn = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+            const totalItems = items.length;
+            
+            // Función para actualizar el carrusel
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Actualizar indicadores
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Event listeners para botones de navegación
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalItems - 1;
+                updateCarousel();
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
+                updateCarousel();
+            });
+            
+            // Event listeners para indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Cambio automático cada 5 segundos
+            setInterval(function() {
+                currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
+                updateCarousel();
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
