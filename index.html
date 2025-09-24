@@ -7,66 +7,72 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Banner Superior -->
-    <header class="banner">
+    <!-- SECCIÓN 1: Banner Superior -->
+    <header class="banner-section">
         <div class="banner-content">
             <h1>🚀 Portal Académico Palmace</h1>
             <p>Bienvenido al sistema de educación distribuida</p>
             <div class="social-links">
-                <a href="#" class="social-link">📘</a>
-                <a href="#" class="social-link">🐦</a>
-                <a href="#" class="social-link">💼</a>
-                <a href="#" class="social-link">📸</a>
+                <a href="#" class="social-link">📘 Facebook</a>
+                <a href="#" class="social-link">🐦 Twitter</a>
+                <a href="#" class="social-link">💼 LinkedIn</a>
+                <a href="#" class="social-link">📸 Instagram</a>
             </div>
         </div>
     </header>
 
-    <!-- Sección Principal de Acceso -->
-    <main class="access-grid">
-        <!-- Universidad 1 - UPTB -->
-        <div class="university-card uptb-card">
-            <div class="card-content">
+    <!-- SECCIÓN 2: Autenticación Universidades (Dividida Verticalmente) -->
+    <section class="auth-section">
+        <!-- Subsección Izquierda: UPTB -->
+        <div class="university-half uptb-half">
+            <div class="university-content">
                 <h2>🏛️ UPTB</h2>
-                <p>Universidad Politécnica Territorial Bolivariana</p>
+                <p class="university-subtitle">Universidad Politécnica Territorial Bolivariana</p>
                 <form class="login-form" onsubmit="authUPTB(event)">
                     <input type="password" placeholder="Clave de acceso" required>
                     <button type="submit">🔐 Ingresar</button>
                 </form>
+                <div class="university-theme">Ingeniería • Tecnología • Innovación</div>
             </div>
         </div>
 
-        <!-- Universidad 2 - UNESR -->
-        <div class="university-card unesr-card">
-            <div class="card-content">
+        <!-- Subsección Derecha: UNESR -->
+        <div class="university-half unesr-half">
+            <div class="university-content">
                 <h2>🎓 UNESR</h2>
-                <p>Universidad Nacional Experimental Simón Rodríguez</p>
+                <p class="university-subtitle">Universidad Nacional Experimental Simón Rodríguez</p>
                 <form class="login-form" onsubmit="authUNESR(event)">
                     <input type="password" placeholder="Clave de acceso" required>
                     <button type="submit">🔐 Ingresar</button>
                 </form>
+                <div class="university-theme">Administración • Ciencias Sociales • Educación</div>
             </div>
         </div>
+    </section>
 
-        <!-- Visitantes -->
-        <div class="visitor-section">
-            <div class="visitor-card" onclick="accessVisitor()">
-                <div class="card-content">
-                    <h3>👥 Área de Visitantes</h2>
-                    <p>Acceso libre a recursos públicos</p>
-                    <button class="visitor-btn">🌍 Ingresar como Visitante</button>
-                </div>
-            </div>
-
-            <!-- Router Tradicional -->
-            <div class="router-card" onclick="accessRouter()">
-                <div class="card-content">
-                    <h3>🛣️ Router Tradicional</h2>
-                    <p>Acceso al sistema anterior</p>
-                    <button class="router-btn">⚡ Acceder al Router</button>
-                </div>
+    <!-- SECCIÓN 3: Visitantes (Imagen Clickeable) -->
+    <section class="visitor-section">
+        <div class="visitor-card" onclick="accessVisitor()">
+            <div class="visitor-content">
+                <div class="visitor-icon">👥</div>
+                <h3>Área de Visitantes</h3>
+                <p>Acceso libre a recursos públicos sin restricciones</p>
+                <button class="access-btn">🌍 Ingresar como Visitante</button>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- SECCIÓN 4: Router Tradicional -->
+    <section class="router-section">
+        <div class="router-card" onclick="accessRouter()">
+            <div class="router-content">
+                <div class="router-icon">🛣️</div>
+                <h3>Router Tradicional</h3>
+                <p>Acceso al sistema de routing anterior</p>
+                <button class="access-btn">⚡ Acceder al Router</button>
+            </div>
+        </div>
+    </section>
 
     <script src="app.js"></script>
 </body>
